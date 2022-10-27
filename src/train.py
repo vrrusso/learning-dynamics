@@ -48,7 +48,6 @@ train_ds = MNIST("/data/mnist/",train=True,download=True,transform=transforms.Co
 
 
 
-
 device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 print(device)
 
@@ -60,7 +59,7 @@ train_ds = MNIST("/data/mnist/",train=True,download=True,transform=transforms.Co
 
 mnist = IndexedMnist(train_ds)
 
-dl = DataLoader(mnist,batch_size=128,shuffle=True,num_workers=4,pin_memmory=True)
+dl = DataLoader(mnist,batch_size=128,shuffle=True,num_workers=4,pin_memory=True)
 
 N_EPOCHS = 100
 
