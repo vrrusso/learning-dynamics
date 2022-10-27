@@ -28,7 +28,9 @@ class Trainer:
             running_loss = 0.0
             total_steps = len(self.dataloader)
 
-            for i,(X,y) in enumerate(self.dataloader):
+            for i,(X,y,idx) in enumerate(self.dataloader):
+
+                
                 X = X.to(self.device)
                 y = y.to(self.device)
                 self.optimizer.zero_grad()
