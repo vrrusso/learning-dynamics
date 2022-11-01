@@ -13,39 +13,15 @@ import numpy as np
 
 import sys
 sys.path.insert(1,'/src/utils')
-print(sys.path)
-
 from training_models import Trainer
+
+from mnist import IndexedMnist
 
 import matplotlib.pyplot as plt
 
 
 
 import time
-
-class IndexedMnist(Dataset):
-
-    def __init__(self,torchvision_mnist):
-        self.mnist = torchvision_mnist
-
-    def __getitem__(self,idx):
-
-        data,target = self.mnist[idx]
-
-        return data,target,idx
-
-
-    def __len__(self):
-        return len(self.mnist)
-
-
-
-train_ds = MNIST("/data/mnist/",train=True,download=True,transform=transforms.Compose([transforms.ToTensor()]))
-
-
-
-
-
 
 
 device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
@@ -59,7 +35,7 @@ train_ds = MNIST("/data/mnist/",train=True,download=True,transform=transforms.Co
 
 mnist = IndexedMnist(train_ds)
 
-dl = DataLoader(mnist,batch_size=128,shuffle=True,num_workers=4,pin_memory=True)
+dl = DataLoader(mnist,batch_size=64,shuffle=False,num_workers=4,pin_memory=True)
 
 N_EPOCHS = 100
 
@@ -73,7 +49,7 @@ model = model.to(device)
 
 trainer = Trainer(model,mnist,dl,criterion,optimizer,device)
 
-acc_history,loss_history = trainer.first_split_train(N_EPOCHS)
+acc_history,loss_history, fslt = trainer.first_split_train(N_EPOCHS)
 plt.figure(figsize=(15,5))
 
 plt.subplot(1,2,1)
