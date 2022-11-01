@@ -104,7 +104,7 @@ class Trainer:
 
         for i in range(reversed_learning_matrix.shape[1]):
             false_ocurrences = np.argwhere(reversed_learning_matrix[:,i] == False)
-            fslt[i] = (n_epochs -  false_ocurrences[0]) if len(false_ocurrences) > 0 else 0
+            fslt[i] = (epoch -  false_ocurrences[0]) if len(false_ocurrences) > 0 else 0
 
             
         
