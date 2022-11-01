@@ -53,11 +53,11 @@ acc_history,loss_history, fslt = trainer.first_split_train(N_EPOCHS)
 plt.figure(figsize=(15,5))
 
 plt.subplot(1,2,1)
-plt.plot(range(1,N_EPOCHS+1),acc_history)
+plt.plot(range(1,len(acc_history)+1),acc_history)
 plt.title("Acurácia")
 plt.legend()
 plt.subplot(1,2,2)
-plt.plot(range(1,N_EPOCHS+1),loss_history)
+plt.plot(range(1,len(loss_history)+1),loss_history)
 plt.title("Loss")
 plt.legend()
 

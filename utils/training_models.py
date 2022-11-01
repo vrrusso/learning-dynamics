@@ -77,6 +77,8 @@ class Trainer:
 
             
 
+            
+
             acc_history.append(epoch_acc.cpu())
             loss_history.append(epoch_loss)
 
@@ -84,11 +86,17 @@ class Trainer:
             print('------')
             print()
             print()
+
+            if epoch > 6 and np.mean( acc_history[-5:-1]+[acc_history[-1]]) > 0.9999:
+                print("Early Stopping - Acurácia 1.0 atingida")
+                break
     
         stop = time.perf_counter()
         print(f"Tempo total de Treinamento: {stop-start}")
 
+        
         learning_matrix = learning_matrix.numpy()
+        learning_matrix = learning_matrix[:epoch,:]
         reversed_learning_matrix = np.flip(learning_matrix,axis=0)
 
         
